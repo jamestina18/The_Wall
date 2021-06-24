@@ -4,31 +4,42 @@
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+     {% load static %}
+     <link rel="stylesheet" href="{% static 'style.css' %}">
      <title>Document</title>
+
 </head>
 <body>
      <div class="container-fluid">
-          <div class="row align-items-center" >
-               <div class="col">
-                    <form action="/log_reg" method = POST>
+          <div class="row justify-content-md-center " >
+               <div class="mb-6">
+                    <form action="/log-reg" method= POST>
                          {% csrf_token %}
-                         First Name:
-                         Last Name:
-                         Email: 
-                         Password:
-                         Confirm Password:
-                         <input type="submit" value="">
+                         <ul>
+                              <li>First Name: <input type="text" name="first_name" ></li>
+                              <li>Last Name: <input type="text" name="last_name" ></li>
+                              <li>Email: <input type="text" name="email"></li>
+                              <li>Password: <input type="text" name="password"></li>
+                              <li>Confirm Password: <input type="text" name="confirm_password"></li>
+                              <li><button type="submit" class="btn btn-outline-success">Submit</button></li>  
+                         </ul> 
                     </form>
                </div>
-               <div class="col">
-                    <form action="/login" method="POST">
+               <div class="mb-6">
+                    <form action="/log-in" method=POST>
                          {% csrf_token %}
-                         Email:
-                         Password:
-                         <input type="submit" value="">         
+                         <ul>
+                              <li>Email: <input type="email" name="email"></li>  
+                              <li>Password: <input type="password" name="password"></li>  
+                              <li><button type="submit" class="btn btn-outline-success">Submit</button>     
+                         </ul>
                     </form>
                </div>
           </div>
      </div>
+     {% if messages %} {% for msg in messages %}
+    <h3>{{ msg }}</h3>
+    {% endfor %} {% endif %}
 </body>
 </html>

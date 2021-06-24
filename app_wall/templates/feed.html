@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Wall Feed</title>
+</head>
+<body>
+     <h1>FEED</h1>
+     <form action="logout"><button>LOG OUT</button></form>
+      {% for post in all_posts %}
+     <span>{{ post.user.first_name }} {{ post.user.last_name }} </span>
+     <span>{{ post.text }} updated@ {{ post.updated_at }} </span>
+     {% if request.session.user_id == post.user.id %}
+     <span><a href="/edit/{{ post.id }}">EDIT</a></span>
+     {% endif %}
+     {% for comment in post.comments.all %}
+     <p>{{ comment.user.first_name }} {{ comment.user.last_name }} commented
+          {{ comment.text }}
+     </p>
+     {% endfor %}
+     <h2>Add Comment</h2>
+     <form action="/add-comment" method="POST">
+          {% csrf_token %}
+          <textarea name="comment_text" id="" cols="30" rows="10"></textarea>
+          <input type="hidden" name="post_id" value="{{ post.id }}" />
+          <button>Add Comment</button>
+     </form>
+     <hr />
+     {% endfor %}
+</body>
+</html>

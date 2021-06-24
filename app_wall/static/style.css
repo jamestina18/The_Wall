@@ -1,0 +1,11 @@
+container-fluid{
+     align-items: center;
+}
+ul{
+   list-style: none;  
+}
+
+form{
+     display: block;
+     margin: 10px;
+}
