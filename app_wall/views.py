@@ -63,6 +63,8 @@ def wall_feed(request):
      return render(request, 'feed.html', context)
 
 def edit_post(request, id):
+     if 'user_id' not in request.session:
+          return HttpResponse('<h1>You must be logged in</h1>')
      post_to_edit = Post.objects.get(id = id)
      context = {
           "post": post_to_edit
